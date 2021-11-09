@@ -5,8 +5,6 @@ export default async function CollectionName(contract) {
       "/nft_token_ids/?page-size=1&key=" +
       process.env.COVALENT_KEY
   );
-
   const name = await res.json().then((r) => r.data.items[0].contract_name);
-  console.log(name);
   return name;
 }

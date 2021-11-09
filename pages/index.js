@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 import {
   Heading,
   Text,
@@ -44,7 +45,7 @@ export default function Home({ collections }) {
               Explore NFTs and key NFT metrics on Binance Smart chain
             </Text>
           </Box>
-          <Box borderRadius="lg" borderWidth={"1px"} p="4"></Box>
+          {/* <Box borderRadius="lg" borderWidth={"1px"} p="4"></Box>
           <Box borderRadius="lg" borderWidth={"1px"} p="4">
             <StatGroup>
               <Stat>
@@ -55,30 +56,37 @@ export default function Home({ collections }) {
                 </StatHelpText>
               </Stat>
             </StatGroup>
-          </Box>
+          </Box> */}
           <Box borderRadius="lg" borderWidth={"1px"} p="4">
             <Heading as="h2" size="sm" mb={3}>
               Collections
             </Heading>
             <SimpleGrid columns={4} spacing={2}>
               {collections.map((collection) => (
-                <Box h={"80%"} borderRadius="lg" borderWidth={"1px"} p="4">
-                  <Image src={collection.image} />
-                  <Box borderRadius="lg" boxSize="sm" pt="2">
-                    {collection.name}
-                    <br />
-                    Items: {collection.size}
-                  </Box>
-                </Box>
+                <Link
+                  key={collection.contract}
+                  href={"/collection/" + collection.contract}
+                >
+                  <a>
+                    <Box h={"80%"} borderRadius="lg" borderWidth={"1px"} p="4">
+                      <Image src={collection.image} />
+                      <Box borderRadius="lg" boxSize="sm" pt="2">
+                        {collection.name}
+                        <br />
+                        Items: {collection.size}
+                      </Box>
+                    </Box>
+                  </a>
+                </Link>
               ))}
             </SimpleGrid>
           </Box>
 
-          <Box borderRadius="lg" borderWidth={"1px"} p="4">
+          {/* <Box borderRadius="lg" borderWidth={"1px"} p="4">
             <Heading as="h2" size="sm" mb={3}>
               Top collections by volume
             </Heading>
-          </Box>
+          </Box> */}
         </Stack>
       </Container>
     </div>
