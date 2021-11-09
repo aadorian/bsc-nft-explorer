@@ -19,12 +19,15 @@ import {
   RadioGroup,
   SimpleGrid,
   Image,
+  Input,
 } from "@chakra-ui/react";
 import data from "../collections.json";
 
 import CollectionSize from "@/utils/collectionSize";
 import CollectionName from "@/utils/collectionName";
 import CollectionImage from "@/utils/collectionImage";
+
+import BasicModal from "@/components/BasicModal";
 
 export default function Home({ collections }) {
   return (
@@ -57,6 +60,18 @@ export default function Home({ collections }) {
               </Stat>
             </StatGroup>
           </Box> */}
+          <Box borderRadius="lg" borderWidth={"1px"} p="4">
+            <BasicModal
+              buttonText={"Suggest a collection"}
+              title="Suggest a collection"
+            >
+              <Text pb={6}>
+                Want to see a collection added to BSC NFT Explorer? Simply enter
+                the contract address of the collection below.
+              </Text>
+              <Input focusBorderColor="gray" placeholder="0x..." />
+            </BasicModal>
+          </Box>
           <Box borderRadius="lg" borderWidth={"1px"} p="4">
             <Heading as="h2" size="sm" mb={3}>
               Collections
