@@ -63,7 +63,10 @@ function Collection(props) {
         </StatGroup>
       </Box>
       <Box borderRadius="lg" borderWidth={"1px"} p="4">
-        <ApexChart data={props.dailyVolume} />
+        <ApexChart
+          data={props.dailyVolume.data}
+          minDate={props.dailyVolume.minDate}
+        />
       </Box>
     </Page>
   );
