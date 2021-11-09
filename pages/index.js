@@ -17,10 +17,13 @@ import {
   StatGroup,
   Radio,
   RadioGroup,
+  SimpleGrid,
 } from "@chakra-ui/react";
 import data from "../collections.json";
 
-export default function Home() {
+import { collectionSize } from "@/utils/collectionSize";
+
+export default function Home({ collections }) {
   return (
     <div>
       <Head>
@@ -55,7 +58,18 @@ export default function Home() {
             <Heading as="h2" size="sm" mb={3}>
               Collections
             </Heading>
+            <SimpleGrid columns={4} spacing={10}>
+              {collections.map((collection) => (
+                <Box borderRadius="lg" borderWidth={"1px"} p="4">
+                  {collection.contract}
+                  <Box borderRadius="lg" boxSize="sm">
+                    Size: {collection.size}
+                  </Box>
+                </Box>
+              ))}
+            </SimpleGrid>
           </Box>
+
           <Box borderRadius="lg" borderWidth={"1px"} p="4">
             <Heading as="h2" size="sm" mb={3}>
               Top collections by volume
@@ -67,17 +81,13 @@ export default function Home() {
   );
 }
 
-// export async function getServerSideProps({ params }) {
-//   const res = await fetch(`https://...`);
-//   const data = await res.json();
-
-//   if (!data) {
-//     return {
-//       notFound: true,
-//     };
-//   }
-
-//   return {
-//     props: {}, // will be passed to the page component as props
-//   };
-// }
+export async function getServerSideProps({ params }) {
+  let collections = [];
+  for (let i in data) {
+    let contract = data[i];
+    const res = await collectionSize(contract);
+    collections.push({ contract, size: res });
+  }
+  console.log(collections);
+  return { props: { collections } };
+}
