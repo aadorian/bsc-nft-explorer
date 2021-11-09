@@ -85,7 +85,7 @@ export default function Home({ collections }) {
   );
 }
 
-export async function getServerSideProps({ params }) {
+export async function getStaticProps() {
   let collections = [];
   for (let i in data) {
     let contract = data[i];
