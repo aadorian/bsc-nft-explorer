@@ -17,6 +17,10 @@ Usually web apps face a trade-off between slowly fetching the latest data (reque
 
 BSC NFT Explorer loads lightning fast statically-generated pages whilst continiously displaying the latest data. This is made possible by the one of the latest features on Next.js, Incremental Static Regeneration (ISR). For each NFT collection's page, the server will attempt to regenerate the page once every 10 seconds.
 
+## Interactive charts
+
+BSC NFT Explorer features interactive, zoomable charts, made possible by the [Apexcharts](https://apexcharts.com/) package.
+
 ## Setup
 
 - Clone the repository
