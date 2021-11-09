@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
 import {
   Heading,
   Text,
@@ -18,10 +17,12 @@ import {
   Radio,
   RadioGroup,
   SimpleGrid,
+  Image,
 } from "@chakra-ui/react";
 import data from "../collections.json";
 
 import { collectionSize } from "@/utils/collectionSize";
+import collectionImage from "@/utils/collectionImage";
 
 export default function Home({ collections }) {
   return (
@@ -61,7 +62,7 @@ export default function Home({ collections }) {
             <SimpleGrid columns={4} spacing={10}>
               {collections.map((collection) => (
                 <Box borderRadius="lg" borderWidth={"1px"} p="4">
-                  {collection.contract}
+                  <Image src={collection.image} />
                   <Box borderRadius="lg" boxSize="sm">
                     Size: {collection.size}
                   </Box>
@@ -85,8 +86,9 @@ export async function getServerSideProps({ params }) {
   let collections = [];
   for (let i in data) {
     let contract = data[i];
-    const res = await collectionSize(contract);
-    collections.push({ contract, size: res });
+    const size = await collectionSize(contract);
+    const image = await collectionImage(contract);
+    collections.push({ contract, size, image });
   }
   console.log(collections);
   return { props: { collections } };
