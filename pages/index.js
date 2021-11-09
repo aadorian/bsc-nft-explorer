@@ -67,7 +67,7 @@ export default function Home({ collections }) {
                   <Box borderRadius="lg" boxSize="sm">
                     {collection.name}
                     <br />
-                    Size: {collection.size}
+                    Items: {collection.size}
                   </Box>
                 </Box>
               ))}
@@ -89,10 +89,10 @@ export async function getServerSideProps({ params }) {
   let collections = [];
   for (let i in data) {
     let contract = data[i];
-    // const name = await CollectionName(contract);
+    const name = await CollectionName(contract);
     const size = await CollectionSize(contract);
     const image = await CollectionImage(contract);
-    collections.push({ name: "standin", contract, size, image });
+    collections.push({ name, contract, size, image });
   }
   console.log(collections);
   return { props: { collections } };
