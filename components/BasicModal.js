@@ -10,8 +10,11 @@ import {
   Button,
 } from "@chakra-ui/react";
 
+import Link from "next/link";
+
 function BasicModal({ children, ...props }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <>
       <Button onClick={onOpen}>{props.buttonText}</Button>
@@ -24,7 +27,11 @@ function BasicModal({ children, ...props }) {
           <ModalBody>{children}</ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="gray">Submit</Button>
+            <Link href={props.actionLink} passHref>
+              <Button as="a" target="_blank" colorScheme="gray">
+                Submit
+              </Button>
+            </Link>
           </ModalFooter>
         </ModalContent>
       </Modal>

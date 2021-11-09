@@ -11,17 +11,23 @@ The app relies on:
 - [Covalent](https://www.covalenthq.com/) for the latest blockchain data
 - [Next.js](https://nextjs.org/) and [Chakra UI](https://chakra-ui.com/) for the frontend
 
+---
+
 ### Lightning-fast performance
 
 Usually web apps face a trade-off between slowly fetching the latest data (requests take time) or quickly displaying static data (which is out of date).
 
 BSC NFT Explorer loads lightning fast statically-generated pages whilst continiously displaying the latest data. This is made possible by the one of the latest features on Next.js, Incremental Static Regeneration (ISR). For each NFT collection's page, the server will attempt to regenerate the page once every 10 seconds.
 
+---
+
 ### Interactive charts
 
 BSC NFT Explorer features interactive, zoomable charts, made possible by the [Apexcharts](https://apexcharts.com/) package.
 
-### Add new NFT collections in seconds
+---
+
+### Add a new NFT collection in seconds
 
 With just a few clicks, you can request a new collection to be added to BSC NFT explorer. Site administrators can easily see the latest requests and approve them:
 

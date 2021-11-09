@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
+import { useState } from "react";
 import {
   Heading,
   Text,
@@ -30,6 +31,7 @@ import CollectionImage from "@/utils/collectionImage";
 import BasicModal from "@/components/BasicModal";
 
 export default function Home({ collections }) {
+  const [addCollection, setAddCollection] = useState("");
   return (
     <div>
       <Head>
@@ -63,13 +65,23 @@ export default function Home({ collections }) {
           <Box borderRadius="lg" borderWidth={"1px"} p="4">
             <BasicModal
               buttonText={"Suggest a collection"}
+              actionLink={
+                "https://github.com/karlxlee/bsc-nft-explorer/issues/new?title=Add+new+collection&body=" +
+                addCollection
+              }
+              actionTarget={"_blank"}
               title="Suggest a collection"
             >
               <Text pb={6}>
                 Want to see a collection added to BSC NFT Explorer? Simply enter
                 the contract address of the collection below.
               </Text>
-              <Input focusBorderColor="gray" placeholder="0x..." />
+              <Input
+                value={addCollection}
+                onChange={(e) => setAddCollection(e.target.value)}
+                focusBorderColor="gray"
+                placeholder="0x..."
+              />
             </BasicModal>
           </Box>
           <Box borderRadius="lg" borderWidth={"1px"} p="4">
