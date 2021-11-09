@@ -15,4 +15,17 @@ The app relies on:
 
 Usually web apps face a trade-off between slowly fetching the latest data (requests take time) or quickly displaying static data (which is out of date).
 
-BSC NFT Explorer loads lightning fast statically-generated pages whilst continiously displaying the latest data. This is made possible by the one of the latest features on Next.js, Incremental Static Regeneration (ISR).
+BSC NFT Explorer loads lightning fast statically-generated pages whilst continiously displaying the latest data. This is made possible by the one of the latest features on Next.js, Incremental Static Regeneration (ISR). For each NFT collection's page, the server will attempt to regenerate the page once every 10 seconds.
+
+## Setup
+
+- Clone the repository
+- Add your `COVALENT_KEY` in the .env file
+- Run `yarn install`
+- Run `yarn dev`
+
+## Deploy
+
+- Add your `COVALENT_KEY` to your Vercel project's environment variables
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fkarlxlee%2Fbsc-nft-explorer)
