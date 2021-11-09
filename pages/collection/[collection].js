@@ -19,7 +19,7 @@ import CollectionSize from "@/utils/collectionSize";
 import CollectionName from "@/utils/collectionName";
 import CollectionImage from "@/utils/collectionImage";
 import CollectionTotalVolume from "@/utils/collectionTotalVolume";
-import CollectionDailyVolume from "@/utils/collectionDailyVolume";
+import CollectionDailyStats from "@/utils/collectionDailyStats";
 import dynamic from "next/dynamic";
 
 const ApexChart = dynamic(() => import("@/components/LineChart"), {
@@ -63,10 +63,16 @@ function Collection(props) {
         </StatGroup>
       </Box>
       <Box borderRadius="lg" borderWidth={"1px"} p="4">
-        <ApexChart
-          data={props.dailyVolume.data}
-          minDate={props.dailyVolume.minDate}
-        />
+        <Heading as="h2" size="md" pb={2}>
+          Volume (BNB)
+        </Heading>
+        <ApexChart data={props.dailyVolume} minDate={props.minDate} />
+      </Box>
+      <Box borderRadius="lg" borderWidth={"1px"} p="4">
+        <Heading as="h2" size="md" pb={2}>
+          Number of transactions
+        </Heading>
+        <ApexChart data={props.dailyCount} minDate={props.minDate} />
       </Box>
     </Page>
   );
@@ -77,14 +83,22 @@ export async function getStaticProps({ params }) {
   const size = await CollectionSize(params.collection);
   const image = await CollectionImage(params.collection);
   const volume24hr = await CollectionTotalVolume(params.collection, 24);
-  const dailyVolume = await CollectionDailyVolume(
+  const { dailyVolume, dailyCount, minDate } = await CollectionDailyStats(
     params.collection,
     24 * 7 * 5
   );
   // console.log(volumeWeek);
 
   return {
-    props: { name, contract: params.collection, size, volume24hr, dailyVolume },
+    props: {
+      name,
+      contract: params.collection,
+      size,
+      volume24hr,
+      dailyVolume,
+      dailyCount,
+      minDate,
+    },
     // Next.js will attempt to re-generate the page:
     // - When a request comes in
     // - At most once every 10 seconds

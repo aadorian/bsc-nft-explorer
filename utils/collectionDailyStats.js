@@ -13,6 +13,7 @@ export default async function CollectionDailyVolume(contract, hourFrame) {
       process.env.COVALENT_KEY
   );
   let dailyVolume = [];
+  let dailyCount = [];
   let allDates = [];
   const jsonData = await res.json();
   if (jsonData.data.items.length) {
@@ -24,11 +25,15 @@ export default async function CollectionDailyVolume(contract, hourFrame) {
         x: entry.id.year + " " + entry.id.month + " " + entry.id.day,
         y: entry.volume / 10 ** 18,
       });
+      dailyCount.push({
+        x: entry.id.year + " " + entry.id.month + " " + entry.id.day,
+        y: entry.count,
+      });
       allDates.push(
         Date.parse(entry.id.year + " " + entry.id.month + " " + entry.id.day)
       );
     }
   }
   let minDate = new Date(Math.min(...allDates)).getTime();
-  return { data: dailyVolume, minDate };
+  return { dailyVolume, dailyCount, minDate };
 }
