@@ -18,7 +18,14 @@ import data from "../../collections.json";
 import CollectionSize from "@/utils/collectionSize";
 import CollectionName from "@/utils/collectionName";
 import CollectionImage from "@/utils/collectionImage";
-import CollectionVolume from "@/utils/collectionVolume";
+import CollectionTotalVolume from "@/utils/collectionTotalVolume";
+import CollectionDailyVolume from "@/utils/collectionDailyVolume";
+import dynamic from "next/dynamic";
+
+const ApexChart = dynamic(() => import("@/components/LineChart"), {
+  ssr: false,
+});
+// import ApexChart from "@/components/LineChart";
 
 var formatter = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -55,7 +62,9 @@ function Collection(props) {
           </Stat>
         </StatGroup>
       </Box>
-      <SimpleGrid columns={2} spacing={10}></SimpleGrid>
+      <Box borderRadius="lg" borderWidth={"1px"} p="4">
+        <ApexChart data={props.dailyVolume} />
+      </Box>
     </Page>
   );
 }
@@ -64,10 +73,15 @@ export async function getStaticProps({ params }) {
   const name = await CollectionName(params.collection);
   const size = await CollectionSize(params.collection);
   const image = await CollectionImage(params.collection);
-  const volume24hr = await CollectionVolume(params.collection, 24);
+  const volume24hr = await CollectionTotalVolume(params.collection, 24);
+  const dailyVolume = await CollectionDailyVolume(
+    params.collection,
+    24 * 7 * 5
+  );
+  // console.log(volumeWeek);
 
   return {
-    props: { name, contract: params.collection, size, volume24hr },
+    props: { name, contract: params.collection, size, volume24hr, dailyVolume },
     // Next.js will attempt to re-generate the page:
     // - When a request comes in
     // - At most once every 10 seconds

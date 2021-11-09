@@ -1,4 +1,4 @@
-export default async function CollectionVolume(contract, hourFrame) {
+export default async function CollectionTotalVolume(contract, hourFrame) {
   const startDate = new Date(
     new Date().getTime() - hourFrame * 60 * 60 * 1000
   ).toISOString();
