@@ -64,7 +64,7 @@ export default function Home({ collections }) {
               {collections.map((collection) => (
                 <Box h={"80%"} borderRadius="lg" borderWidth={"1px"} p="4">
                   <Image src={collection.image} />
-                  <Box borderRadius="lg" boxSize="sm">
+                  <Box borderRadius="lg" boxSize="sm" pt="2">
                     {collection.name}
                     <br />
                     Items: {collection.size}
