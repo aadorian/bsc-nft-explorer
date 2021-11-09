@@ -1,4 +1,4 @@
-export default async function collectionSize(contract) {
+export default async function CollectionSize(contract) {
   const res = await fetch(
     "https://api.covalenthq.com/v1/56/tokens/" +
       contract +

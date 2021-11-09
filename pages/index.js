@@ -21,9 +21,9 @@ import {
 } from "@chakra-ui/react";
 import data from "../collections.json";
 
-import collectionSize from "@/utils/collectionSize";
-import collectionName from "@/utils/collectionName";
-import collectionImage from "@/utils/collectionImage";
+import CollectionSize from "@/utils/collectionSize";
+import CollectionName from "@/utils/collectionName";
+import CollectionImage from "@/utils/collectionImage";
 
 export default function Home({ collections }) {
   return (
@@ -89,9 +89,9 @@ export async function getServerSideProps({ params }) {
   let collections = [];
   for (let i in data) {
     let contract = data[i];
-    const name = await collectionName(contract);
-    const size = await collectionSize(contract);
-    const image = await collectionImage(contract);
+    const name = await CollectionName(contract);
+    const size = await CollectionSize(contract);
+    const image = await CollectionImage(contract);
     collections.push({ name, contract, size, image });
   }
   console.log(collections);
