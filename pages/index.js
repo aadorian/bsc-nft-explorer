@@ -21,7 +21,8 @@ import {
 } from "@chakra-ui/react";
 import data from "../collections.json";
 
-import { collectionSize } from "@/utils/collectionSize";
+import collectionSize from "@/utils/collectionSize";
+import collectionName from "@/utils/collectionName";
 import collectionImage from "@/utils/collectionImage";
 
 export default function Home({ collections }) {
@@ -59,11 +60,13 @@ export default function Home({ collections }) {
             <Heading as="h2" size="sm" mb={3}>
               Collections
             </Heading>
-            <SimpleGrid columns={4} spacing={10}>
+            <SimpleGrid columns={4} spacing={2}>
               {collections.map((collection) => (
                 <Box borderRadius="lg" borderWidth={"1px"} p="4">
                   <Image src={collection.image} />
                   <Box borderRadius="lg" boxSize="sm">
+                    {collection.name}
+                    <br />
                     Size: {collection.size}
                   </Box>
                 </Box>
@@ -86,9 +89,10 @@ export async function getServerSideProps({ params }) {
   let collections = [];
   for (let i in data) {
     let contract = data[i];
+    const name = await collectionName(contract);
     const size = await collectionSize(contract);
     const image = await collectionImage(contract);
-    collections.push({ contract, size, image });
+    collections.push({ name, contract, size, image });
   }
   console.log(collections);
   return { props: { collections } };
